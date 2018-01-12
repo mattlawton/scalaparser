@@ -11,17 +11,11 @@ class Parser {
 
     public static void main(String[] args) throws IOException
     {
-
         Scanner keyboard = new Scanner(System.in);
-
-
-
         System.out.print("Enter file name: ");
         String filename = keyboard.nextLine();
 
-
         Swagger swagger = new SwaggerParser().read(filename);
-
 
         String template = ("package oci\n\n" +
                 "import io.gatling.core.Predef._\n" +
@@ -30,7 +24,6 @@ class Parser {
                 "class TestSimulation extends Simulation {\n\n" +
                 "val httpConf = http\n" +
                 "\t.baseURL(" + swagger.getBasePath() + ")\n");
-
 
         StringBuilder template2 = new StringBuilder();
         for (String path : swagger.getPaths().keySet()) {
@@ -42,14 +35,12 @@ class Parser {
             }
         }
         String template3 = "setUp(scn.inject(atOnceUsers(5).protocols(httpConf))\n";
-
-
+        
         StringBuilder finalText = new StringBuilder();
-        finalText.append(template).append(template2).append(template3);
+        finalText.append(template).append(template2).append(template3).append("\n}");
         String output = finalText.toString();
-        BufferedWriter bw = new BufferedWriter(new FileWriter("TestOutput.scala"));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("TestSimulation.scala"));
         bw.write(output);
-        bw.write("}");
         bw.close();
     }
 }
