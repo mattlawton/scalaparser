@@ -26,7 +26,7 @@ class Parser {
         StringBuilder template2 = new StringBuilder();
         for (String path : swagger.getPaths().keySet()) {
             for (HttpMethod method : swagger.getPath(path).getOperationMap().keySet()) {
-                String opName = "\"." + method.toString() + ":" + path + "\"";
+                String opName = "\"\t." + method.toString() + ":" + path + "\"";
                 template2.append("\t.exec(http(").append(opName).append("))\n");
                 String pathUrl = "\"" + path + "\"";
                 template2.append("." + method.toString().toLowerCase()).append(pathUrl).append("))\n");
