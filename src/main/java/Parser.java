@@ -18,7 +18,7 @@ class Parser {
            String out = getOutputFile();
            int num = getNumber();
             writeFile(buildString(new File(in), num),
-                    new File(out));
+                    out);
         }
 
         if (args.length == 3) {
@@ -33,7 +33,7 @@ class Parser {
                 getNumber();
             }
             writeFile(buildString(new File(args[0]), Integer.parseInt(args[2])),
-                    new File(args[1]));
+                    args[1]);
         }
 
     }
@@ -155,7 +155,10 @@ class Parser {
         return fullText.toString();
     }
 
-    public static void writeFile(String generatedScala, File outFile) throws IOException {
+    public static void writeFile(String generatedScala, String outFile) throws IOException {
+        if (!outFile.contains(".scala")) {
+            outFile += ".scala";
+        }
         FileWriter fw = new FileWriter(outFile,false);
         fw.write(generatedScala);
         fw.close();
