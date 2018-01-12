@@ -29,7 +29,7 @@ class Parser {
                 String opName = "\"." + method.toString() + ":" + path + "\"";
                 template2.append("\t.exec(http(").append(opName).append("))\n");
                 String pathUrl = "\"" + path + "\"";
-                template2.append(".\t" + method.toString().toLowerCase()).append(pathUrl).append("))\n");
+                template2.append("\t." + method.toString().toLowerCase()).append(pathUrl).append("))\n");
             }
         }
         String template3 = "setUp(scn.inject(atOnceUsers(5).protocols(httpConf))\n";
