@@ -118,5 +118,6 @@ val httpConf = http
 	.post("/reserve/{orgCode}/{reservationID}/unscheduledemand"))
 	.exec(http(".POST:/reserve/{orgCode}/{ttl}/{forceReserve}"))
 	.post("/reserve/{orgCode}/{ttl}/{forceReserve}"))
-setUp(scn.inject(atOnceUsers(5).protocols(httpConf))
+setUp(scn.inject(atOnceUsers(15).protocols(httpConf))
+
 }
