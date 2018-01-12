@@ -5,14 +5,23 @@ import io.swagger.models.Swagger;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 class Parser {
 
     public static void main(String[] args) throws IOException
     {
 
-        Swagger swagger = new SwaggerParser().read(
-                "./kohls-swagger.json");
+        Scanner keyboard = new Scanner(System.in);
+
+
+
+        System.out.print("Enter file name: ");
+        String filename = keyboard.nextLine();
+
+
+        Swagger swagger = new SwaggerParser().read(filename);
+
 
         String template = ("package oci\n\n" +
                 "import io.gatling.core.Predef._\n" +
@@ -29,7 +38,7 @@ class Parser {
                 String opName = "\"." + method.toString() + ":" + path + "\"";
                 template2.append("\t.exec(http(").append(opName).append("))\n");
                 String pathUrl = "\"" + path + "\"";
-                template2.append("\t." + method.toString().toLowerCase()).append(pathUrl).append("))\n");
+                template2.append("\t." + method.toString().toLowerCase()).append("(").append(pathUrl).append("))\n");
             }
         }
         String template3 = "setUp(scn.inject(atOnceUsers(5).protocols(httpConf))\n";
