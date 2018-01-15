@@ -42,6 +42,9 @@ class Parser {
         String input = " ";
         System.out.print("Enter input file name to be parsed: ");
         input = keyboard.nextLine();
+        if (!input.contains(".json")) {
+            input += ".json";
+        }
         while (!checkInputFile(input)) {
             System.out.print("Enter input file name to be parsed: ");
             input = keyboard.nextLine();
